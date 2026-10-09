@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>I'm Sorry, Madam Jiiiiii ❤️</title>
+
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Page Background */
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            padding: 25px 15px;
+
+            font-family: "Segoe UI", cursive, sans-serif;
+
+            background: linear-gradient(
+                135deg,
+                #ffe0ec,
+                #e8d9ff,
+                #ffd6e7,
+                #fff0f5
+            );
+
+            background-size: 400% 400%;
+            animation: gradientMove 12s ease infinite;
+        }
+
+        /* Animated Background */
+        @keyframes gradientMove {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Falling Hearts and Emojis */
+        .falling {
+            position: fixed;
+            top: -50px;
+            z-index: 0;
+            pointer-events: none;
+            user-select: none;
+            opacity: 0.85;
+
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-10vh) rotate(0deg);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 0.9;
+            }
+
+            90% {
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translateY(115vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Main Card */
+        .card {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 480px;
+            padding: 38px 28px;
+            text-align: center;
+
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            border-radius: 30px;
+
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+
+            box-shadow: 0 15px 50px rgba(183, 85, 139, 0.2);
+
+            animation: appear 1.2s ease;
+        }
+
+        /* Card Entrance Animation */
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Heart Animation */
+        .big-heart {
+            display: inline-block;
+            font-size: 65px;
+            filter: drop-shadow(0 5px 10px #ff9cbe);
+
+            animation: heartbeat 1.4s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+
+            15% {
+                transform: scale(1.18);
+            }
+
+            30% {
+                transform: scale(1);
+            }
+
+            45% {
+                transform: scale(1.12);
+            }
+        }
+
+        /* Heading */
+        h1 {
+            margin: 15px 0;
+            color: #d63384;
+            font-size: clamp(28px, 7vw, 38px);
+            text-shadow: 2px 3px 10px #ffc4dc;
+        }
+
+        /* Subtitle */
+        .subtitle {
+            margin-bottom: 24px;
+            color: #956083;
+            font-size: 15px;
+            letter-spacing: 1px;
+        }
+
+        /* Main Message */
+        .message {
+            color: #65445c;
+            font-size: 16px;
+            line-height: 1.9;
+            text-align: center;
+        }
+
+        .message strong {
+            color: #d63384;
+        }
+
+        /* Decorative Divider */
+        .divider {
+            margin: 22px 0;
+            color: #f08bb8;
+            font-size: 23px;
+            letter-spacing: 6px;
+        }
+
+        /* Quote Box */
+        .quote {
+            margin: 20px 0;
+            padding: 18px;
+
+            color: #a34479;
+            font-style: italic;
+            line-height: 1.8;
+
+            background: linear-gradient(
+                135deg,
+                #fff0f6,
+                #f4eaff
+            );
+
+            border-left: 4px solid #f39bc5;
+            border-radius: 18px;
+        }
+
+        /* Button */
+        button {
+            margin-top: 10px;
+            padding: 14px 26px;
+
+            border: none;
+            border-radius: 50px;
+            outline: none;
+
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            font-family: inherit;
+
+            background: linear-gradient(
+                135deg,
+                #ff6fae,
+                #c77dff
+            );
+
+            box-shadow: 0 8px 20px rgba(219, 91, 165, 0.3);
+
+            cursor: pointer;
+            transition: transform 0.3s ease,
+                        box-shadow 0.3s ease;
+        }
+
+        button:hover {
+            transform: translateY(-3px) scale(1.04);
+            box-shadow: 0 12px 25px rgba(219, 91, 165, 0.4);
+        }
+
+        button:focus-visible {
+            outline: 3px solid #d63384;
+            outline-offset: 4px;
+        }
+
+        /* Hidden Extra Message */
+        #extraMessage {
+            display: none;
+            margin-top: 22px;
+
+            color: #c02d78;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        #extraMessage.visible {
+            display: block;
+            animation: appear 0.7s ease;
+        }
+
+        /* Decorative Sparkles */
+        .sparkle {
+            position: absolute;
+            color: #ffacd1;
+            animation: twinkle 2s infinite alternate;
+            pointer-events: none;
+        }
+
+        .s1 {
+            top: 18px;
+            left: 22px;
+        }
+
+        .s2 {
+            top: 25px;
+            right: 25px;
+        }
+
+        .s3 {
+            bottom: 25px;
+            left: 28px;
+        }
+
+        .s4 {
+            bottom: 20px;
+            right: 25px;
+        }
+
+        @keyframes twinkle {
+            from {
+                opacity: 0.3;
+                transform: scale(0.8);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1.3);
+            }
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 25px;
+            color: #aa7195;
+            font-size: 13px;
+        }
+
+        /* Mobile Responsive Design */
+        @media (max-width: 400px) {
+            .card {
+                padding: 30px 20px;
+            }
+
+            .message {
+                font-size: 15px;
+            }
+
+            .quote {
+                padding: 15px;
+            }
+        }
+
+        /* Respect Reduced-Motion Preferences */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Main Apology Card -->
+    <main class="card">
+
+        <!-- Decorative Sparkles -->
+        <span class="sparkle s1" aria-hidden="true">✧</span>
+        <span class="sparkle s2" aria-hidden="true">✦</span>
+        <span class="sparkle s3" aria-hidden="true">✧</span>
+        <span class="sparkle s4" aria-hidden="true">✦</span>
+
+        <!-- Heart -->
+        <div class="big-heart" aria-hidden="true">💗</div>
+
+        <!-- Heading -->
+        <h1>I'm Really Sorry 🥺</h1>
+
+        <p class="subtitle">
+            A little message from my heart 💌
+        </p>
+
+        <!-- First Apology Message -->
+        <div class="message">
+            Hey, Deviii jiiiii 🫂💖,
+
+            <br><br>
+
+            I know that my words and actions have hurt you,
+            and honestly, <strong>I'm truly sorry.</strong>
+
+            <br><br>
+
+            I never wanted to become the reason behind your
+            sadness. I know that saying sorry cannot magically
+            undo what happened, but I want you to know that
+            <strong>your feelings matter to me.</strong> ❤️
+
+            <br><br>
+
+            I made mistakes, I said things I shouldn't have, and I didn't understand your
+            feelings the way I should have. But I genuinely
+            regret hurting you. 🥹
+        </div>
+
+        <!-- Decorative Divider -->
+        <div class="divider" aria-hidden="true">
+            ♡ ✧ ♡ ✧ ♡
+        </div>
+
+        <!-- Friendship Quote -->
+        <div class="quote">
+            "Some people are too precious to lose over mistakes.
+            And you are one of those people I truly don't want
+            to lose." 💕
+        </div>
+
+        <!-- Second Apology Message -->
+        <div class="message">
+            I'm not asking you to forget everything instantly
+            or pretend that nothing happened.
+
+            <br><br>
+
+            I just hope that you'll find it in your
+            heart to forgive me. I want to learn from my mistakes
+            and show you through my actions that our relationship
+            matters to me. 🌷
+        </div>
+
+        <!-- Interactive Button -->
+        <button
+            type="button"
+            id="loveButton"
+            aria-expanded="false"
+            aria-controls="extraMessage"
+        >
+            One More Thing... 💌
+        </button>
+
+        <!-- Hidden Heartfelt Message -->
+        <div id="extraMessage" aria-hidden="true">
+
+            <h2>🥹💖🫶</h2>
+
+            No matter how awkward things feel right now,
+            I'm still grateful that you're a part of my life.
+
+            <br><br>
+
+            <strong>I'm sorry for hurting you.</strong>
+
+            <br>
+
+            I hope we can heal, smile, and make beautiful
+            memories again — whenever you're ready. 🌈💕
+
+            <br><br>
+
+            Sending you a big virtual hugges and kisses! 
+            🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂
+            😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘
+            💗💗💗💗💗💗💗💗💗💗💗💗💗💗💗💗💗💗💗💗💗💗💗💗💗💗💗💗💗💗💗💗💗💗💗💗💗💗💗💗💗💗💗💗💗💗💗💗💗💗
+            <br><br>
+
+            <span style="font-size: 30px;" aria-hidden="true">
+                💖🌸🦋💞
+            </span>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            Made with a genuinely sorry heart 💗
+        </div>
+
+    </main>
+
+    <script>
+        // Available Falling Emojis
+        const emojis = [
+            "❤️", "💗", "💕", "💖", "💘",
+            "🌸", "✨", "🦋", "💝", "🥹",
+            "🌷", "🤍", "💞", "⭐"
+        ];
+
+        // Create a Falling Emoji
+        function createFallingEmoji() {
+            const emoji = document.createElement("div");
+
+            emoji.classList.add("falling");
+            emoji.textContent =
+                emojis[Math.floor(Math.random() * emojis.length)];
+
+            // Random Position and Appearance
+            emoji.style.left = Math.random() * 100 + "vw";
+
+            emoji.style.fontSize =
+                (14 + Math.random() * 22) + "px";
+
+            const duration = 5 + Math.random() * 7;
+
+            emoji.style.animationDuration = duration + "s";
+
+            document.body.appendChild(emoji);
+
+            // Remove the Emoji After Its Animation
+            setTimeout(() => {
+                emoji.remove();
+            }, duration * 1000);
+        }
+
+        // Create Falling Emojis Continuously
+        const fallingInterval = setInterval(
+            createFallingEmoji,
+            250
+        );
+
+        // Button and Hidden Message Elements
+        const loveButton = document.getElementById("loveButton");
+        const extraMessage = document.getElementById("extraMessage");
+
+        // Toggle the Extra Apology Message
+        function showLove() {
+            const isVisible =
+                extraMessage.classList.contains("visible");
+
+            if (isVisible) {
+                extraMessage.classList.remove("visible");
+                extraMessage.setAttribute("aria-hidden", "true");
+                loveButton.setAttribute("aria-expanded", "false");
+
+                loveButton.textContent = "One More Thing... 💌";
+            } else {
+                extraMessage.classList.remove("visible");
+
+                extraMessage.setAttribute("aria-hidden", "false");
+                extraMessage.classList.add("visible");
+
+                loveButton.setAttribute("aria-expanded", "true");
+                loveButton.textContent = "Hide Message 💗";
+
+                // Create a Small Burst of Hearts
+                for (let i = 0; i < 15; i++) {
+                    setTimeout(createFallingEmoji, i * 100);
+                }
+            }
+        }
+
+        // Attach the Button Click Event
+        loveButton.addEventListener("click", showLove);
+
+        // Stop Creating Emojis When the Page Is Closed
+        window.addEventListener("pagehide", () => {
+            clearInterval(fallingInterval);
+        });
+    </script>
+
+</body>
+</html>
